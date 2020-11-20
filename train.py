@@ -55,17 +55,15 @@ def main(args, hps):
     np.random.seed(args.seed)
     cudnn.deterministic = True
 
-    # SET save_path and logger
+    # save_path and logger
     save_path = os.path.join(args.save_dir, args.save_name)
-    # logger_level = "WARNING"
-    # tb_log = None
 
     tb_log = TBLog(save_path, 'tensorboard')
     logger_level = "INFO"
 
     logger = get_logger(args.save_name, save_path, logger_level)
 
-    # SET FixMatch: class FixMatch in models.fixmatch
+    # init resnet
     bn_momentum = 1.0 - hps.train.ema_m
     resnet_builder = net_builder({'depth': hps.model.depth,
                                   'widen_factor': hps.model.widen_factor,
@@ -80,11 +78,12 @@ def main(args, hps):
 
     logger.info(f'Number of Trainable Params: {count_parameters(model.train_model)}')
 
-    # SET Devices for (Distributed) DataParallel
+    # Assure cuda is available
     if not torch.cuda.is_available():
         raise Exception('ONLY GPU TRAINING IS SUPPORTED')
 
     else:
+        # currently only single gpu is supported
         torch.cuda.set_device(0)
         model.train_model = model.train_model.cuda()
         model.eval_model = model.eval_model.cuda()
@@ -254,6 +253,7 @@ if __name__ == "__main__":
     for group in vars(hps):
         print(group, getattr(hps, group))
 
+    # based on: https://github.com/LeeDoYup/FixMatch-pytorch
     save_path = os.path.join(args.save_dir, args.save_name)
     if os.path.exists(save_path) and not args.overwrite:
         raise Exception('already existing model: {}'.format(save_path))

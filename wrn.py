@@ -4,7 +4,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 
 
-# NOTE: shamelessly stolen from
+# NOTE: taken from: https://github.com/LeeDoYup/FixMatch-pytorch
 class BasicBlock(nn.Module):
     def __init__(self, in_planes, out_planes, stride, bn_momentum=0.1, leaky_slope=0.0, dropRate=0.0):
         super(BasicBlock, self).__init__()

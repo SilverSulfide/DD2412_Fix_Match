@@ -1,4 +1,3 @@
-from __future__ import print_function, division
 import os
 import argparse
 
@@ -45,8 +44,15 @@ def main(args, hps, use_transform=False):
     resnet.to(device)
     resnet.eval()
 
-    eval_dset = SSL_Dataset(name=hps.data.dataset, train=False,
-                            num_classes=hps.data.num_classes, data_dir=hps.data.data_dir, args=args).get_dset()
+    # use the non-normalised version if transforms are to be added
+    if use_transform:
+        eval_dset = SSL_Dataset(name=hps.data.dataset, train=False,
+                                num_classes=hps.data.num_classes, data_dir=hps.data.data_dir,
+                                args=args).get_dset_clean()
+    else:
+        eval_dset = SSL_Dataset(name=hps.data.dataset, train=False,
+                                num_classes=hps.data.num_classes, data_dir=hps.data.data_dir,
+                                args=args).get_dset()
 
     eval_loader = DataLoader(eval_dset, batch_size=batch_size, shuffle=False,
                              num_workers=1, pin_memory=True)

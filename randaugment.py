@@ -1,3 +1,5 @@
+# Taken from: https://github.com/google-research/fixmatch
+
 # copyright: https://github.com/ildoonet/pytorch-randaugment
 # code in this file is adpated from rpmcruz/autoaugment
 # https://github.com/rpmcruz/autoaugment/blob/master/transformations.py

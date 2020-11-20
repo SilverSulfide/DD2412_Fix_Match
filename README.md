@@ -47,7 +47,26 @@ To adjust the strength of the transformations edit the functions in **ssl_datase
 -c --contrast Adds contrast transform to weak augment
 ```
 
+## Evaluation
+
+**eval.py** script is provided to report final or best accuracy of a checkpoint
+
+### Basic call
+```
+python eval.py --load_path path/to/checkpoint.pth -hp path/to/config.yaml
+```
+
+### Optional arguments
+More thorough descriptions can be found at the end of **eval.py**.
+```
+--batch_size Add evaluation batch size that is differs from the config
+--use_train_model Uses training model, instead of EMA evaluation model
+-tr --translate Add translate test images
+-n --noise Add noise to test images
+-c --contrast Add contrast to test images
+```
+
 ## Plotting
 
-**plot_results.py** plots the training loss and test accuracies for a given experiment.
+**plot_results.py** plots the training loss and test accuracies from the logs of a given experiment.
 This function is hardcoded for our results (i.e. our data structure) and needs to be modified for general use.

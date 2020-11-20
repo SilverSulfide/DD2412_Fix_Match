@@ -116,6 +116,7 @@ class AddContrast(object):
         return self.__class__.__name__ + '(v={})'.format(self.v)
 
 
+# the remainder of the classes are adapted from: https://github.com/LeeDoYup/FixMatch-pytorch
 class SSL_Dataset:
     """
     SSL_Dataset class gets cifar10 from torchvision.datasets,
@@ -187,7 +188,6 @@ class SSL_Dataset:
         data, targets = self.get_data()
         num_classes = self.num_classes
         transform = None
-        data_dir = self.data_dir
 
         return BasicDataset(data, targets, num_classes, transform,
                             use_strong_transform, strong_transform, onehot)

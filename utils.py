@@ -65,6 +65,7 @@ def net_builder(net_params: dict):
     return builder.build
 
 
+# NOTE: the rest of the functions are taken from: https://github.com/LeeDoYup/FixMatch-pytorch
 def get_logger(name, save_path=None, level='INFO'):
     logger = logging.getLogger(name)
     logger.setLevel(getattr(logging, level))

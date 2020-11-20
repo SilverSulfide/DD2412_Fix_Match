@@ -37,7 +37,8 @@ class FixMatch:
         self.logger = logger
         self.print_fn = logger.info
 
-        # FIXME: get rid of this
+        # taken from: https://github.com/LeeDoYup/FixMatch-pytorch
+        # FIXME: a better approach exists
         for param_q, param_k in zip(self.train_model.parameters(), self.eval_model.parameters()):
             param_k.data.copy_(param_q.detach().data)  # initialize the evaluation net
             param_k.requires_grad = False  # do not update by gradient for evaluation net
@@ -122,7 +123,7 @@ class FixMatch:
         self.scheduler.step()
         self.train_model.zero_grad()
 
-    # taken from: https://github.com/LeeDoYup/FixMatch-pytorch
+    # the remaining code is taken from: https://github.com/LeeDoYup/FixMatch-pytorch
     @torch.no_grad()
     def _eval_model_update(self):
         """
