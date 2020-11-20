@@ -1,4 +1,4 @@
-# DD2412_fixmatch
+# DD2412_Fix_Match
 DD2412 final project repository by markuz@kth.se &amp; amper@kth.se
 
 ## Note
@@ -22,16 +22,17 @@ Training hyperparemeters can be adjusted in the **config.yaml** file.
 
 ### Basic training call
 ```
-python train.py -hp path/to/config 
+python train.py -hp path/to/config.yaml
 ```
 ### Optional arguments
+More thorough descriptions can be found at the end of **train.py**.
 ```
 --save_dir path/to/save_location
---save_name name of the experiment
---resume enables resuming from checkpoint
+--save_name Name of the experiment
+--resume Enables resuming from checkpoint
 --load_path path/to/checkpoint
---overwrite overwrite existing experiment with the same name
---seed 
+--overwrite Overwrite existing experiment in the same save dir
+--seed 0,1,2 ...
 ```
 
 ### Experiment arguments
